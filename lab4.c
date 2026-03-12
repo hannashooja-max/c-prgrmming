@@ -73,7 +73,8 @@ void findSecondLargest(int mat[MAX][MAX], int m, int n) {
             {
                 secondLargest = largest;
                 largest = mat[i][j];
-            } else if ( mat[i][j] != largest && (secondLargest == largest || mat[i][j] > secondLargest)) 
+            } 
+            else if ( mat[i][j] != largest && (secondLargest == largest || mat[i][j] > secondLargest)) 
             {
                 secondLargest = mat[i][j];
             }
