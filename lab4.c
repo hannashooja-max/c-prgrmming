@@ -6,7 +6,8 @@
 void findSaddlePoints(int mat[MAX][MAX], int m, int n);
 void findSecondLargest(int mat[MAX][MAX], int m, int n);
 
-int main() {
+int main() 
+{
     int m, n, i, j;
     int mat[MAX][MAX];
 
@@ -14,8 +15,10 @@ int main() {
     scanf("%d %d", &m, &n);
 
     printf("Enter matrix elements:\n");
-    for (i = 0; i < m; i++) {
-        for (j = 0; j < n; j++) {
+    for (i = 0; i < m; i++) 
+    {
+        for (j = 0; j < n; j++) 
+        {
             scanf("%d", &mat[i][j]);
         }
     }
@@ -26,10 +29,12 @@ int main() {
     return 0;
 }
 
-void findSaddlePoints(int mat[MAX][MAX], int m, int n) {
+void findSaddlePoints(int mat[MAX][MAX], int m, int n) 
+{
     int i, j, k, found = 0;
 
-    for (i = 0; i < m; i++) {
+    for (i = 0; i < m; i++) 
+    {
         // Step 1: Find the minimum element in current row
         int min = mat[i][0];
         int col_index=0;
