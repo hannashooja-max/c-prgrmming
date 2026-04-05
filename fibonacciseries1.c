@@ -5,7 +5,7 @@ int main()
     printf("final number on the series");
     scanf("%d",&m);
     int i=0;
-    while(i<=m)
+    while(i<m)
     {
         printf("%d\n",a);
         f=a+b;
