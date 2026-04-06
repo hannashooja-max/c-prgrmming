@@ -1,0 +1,19 @@
+#include<stdio.h>
+int main()
+{
+    char sen[100];
+    int i,lenght=0;
+    printf("enter the sentence :");
+    scanf(" %[^\n]",sen);
+    i=0;
+    while(sen[i]!='\0')
+    {
+        if(sen[i]!=' ')
+       {
+           lenght++;
+       }   
+        i++;
+    }
+    printf("lenght of the string is=%d",lenght);
+    return 0;
+}
