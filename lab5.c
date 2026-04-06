@@ -1,70 +1,90 @@
 #include <stdio.h>
 #include <string.h>
-struct Student 
-{
+
+struct Student {
     int roll;
     char name[50];
-    float totalMarks; 
+    float marks;
 };
-void readData(struct Student s[20], int n) 
-{
-    int i;
-    for (i = 0; i < n; i++) 
-    {
+
+void display(struct Student s[], int n);
+void sortByName(struct Student s[], int n);
+void sortByRoll(struct Student s[], int n);
+void sortByMarks(struct Student s[], int n);
+
+int main() {
+    struct Student s[100];
+    int n, i;
+
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
         printf("\nEnter details for student %d\n", i + 1);
         printf("Roll No: ");
         scanf("%d", &s[i].roll);
         printf("Name: ");
-        scanf(" %[^\n]", s[i].name); 
-        printf("Enter Total Marks: ");
-        scanf("%f", &s[i].totalMarks);
+        scanf(" %[^\n]", s[i].name);
+        printf("Marks: ");
+        scanf("%f", &s[i].marks);
+    }
+
+    display(s, n);
+    sortByName(s, n);
+    sortByRoll(s, n);
+    sortByMarks(s, n);
+
+    return 0;
+}
+
+void display(struct Student s[], int n) {
+    printf("\nRoll Number\tName\t\tMarks\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d\t\t%-15s\t%.2f\n", s[i].roll, s[i].name, s[i].marks);
     }
 }
-void printList(struct Student s[20], int n) 
-{
-    int i;
-    printf("\nRank\tRoll\tName\t\tTotal Marks\n");
-    for (i = 0; i < n; i++) 
-    {
-        printf("%d\t%d\t%s\t%f\n", i + 1, s[i].roll, s[i].name, s[i].totalMarks);
-    }
-}
-int main() 
-{
-    int n, i, j;
-    struct Student s[20];
-    int tempRoll;
-    char tempName[50];
-    float tempTotal;
 
-    printf("Enter number of students: ");
-    scanf("%d", &n);
-    readData(s, n);
-    for (i = 0; i < n - 1; i++) 
-    {
-        for (j = 0; j < n - 1; j++) 
-        {
-            if (s[j].totalMarks < s[j + 1].totalMarks) 
-            {
-                
-                // Swap the Total Marks
-                tempTotal = s[j].totalMarks;
-                s[j].totalMarks = s[j + 1].totalMarks;
-                s[j + 1].totalMarks = tempTotal;
-
-                // Swap the Roll Number
-                tempRoll = s[j].roll;
-                s[j].roll = s[j + 1].roll;
-                s[j + 1].roll = tempRoll;
-
-                // Swap the Name (Must use strcpy for strings!)
-                strcpy(tempName, s[j].name);
-                strcpy(s[j].name, s[j + 1].name);
-                strcpy(s[j + 1].name, tempName);
+void sortByName(struct Student s[], int n) {
+    struct Student temp;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (strcmp(s[j].name, s[j + 1].name) > 0) {
+                temp = s[j];
+                s[j] = s[j + 1];
+                s[j + 1] = temp;
             }
         }
     }
-    printf("\nFINAL RANK LIST\n");
-    printList(s, n);
-    return 0;
+    printf("\nSorted by Name:\n");
+    display(s, n);
+}
+
+void sortByRoll(struct Student s[], int n) {
+    struct Student temp;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (s[j].roll > s[j + 1].roll) {
+                temp = s[j];
+                s[j] = s[j + 1];
+                s[j + 1] = temp;
+            }
+        }
+    }
+    printf("\nSorted by Roll Number:\n");
+    display(s, n);
+}
+
+void sortByMarks(struct Student s[], int n) {
+    struct Student temp;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (s[j].marks < s[j + 1].marks) { // Descending for Rank
+                temp = s[j];
+                s[j] = s[j + 1];
+                s[j + 1] = temp;
+            }
+        }
+    }
+    printf("\nSorted by Marks (Rank-wise):\n");
+    display(s, n);
 }
