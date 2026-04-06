@@ -1,0 +1,35 @@
+#include <stdio.h>
+int main()
+{
+    char str[100], temp[100];
+    int length = 0, i, isPalindrome = 1;
+
+    printf("Enter a string: ");
+    scanf("%s", str);
+    while (str[length] != '\0')
+    {
+        length++;
+    }
+    for (i = 0; i < length; i++)
+    {
+        temp[i] = str[length - 1 - i];
+    }
+    temp[i] = '\0';
+    for (i = 0; i < length; i++)
+    {
+        if (str[i] != temp[i])
+        {
+            isPalindrome = 0;
+            break;
+        }
+    }
+    if (isPalindrome == 1)
+    {
+        printf("The string is a palindrome.\n");
+    }
+    else
+    {
+        printf("The string is NOT a palindrome.\n");
+    }
+    return 0;
+}
